@@ -63,7 +63,7 @@ function App() {
     }
   }, [cardsLeft]);
   return (
-    <div className="background-color h-screen font-color">
+    <div className="background-color h-screen w-screen font-color">
       <Header winStreak={pickedCards.length} highestWin={highestWin} />
       <Cards
         setAllCards={setAllCards}
