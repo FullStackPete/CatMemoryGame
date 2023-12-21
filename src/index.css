@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card{
+    object-fit:cover;
+    aspect-ratio: 3/4;
+}
