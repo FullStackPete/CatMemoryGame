@@ -2,7 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
 .card{
     object-fit:cover;
     aspect-ratio: 3/4;
+    
+}
+.pacifico{
+    font-family: 'Pacifico', cursive;
+}
+.jost{
+    font-family: 'Jost', sans-serif;
+}
+
+.background-color{
+    background-color:#A891D4;
+}
+
+.text-background{
+    background-color:#242038;
+}
+.font-color{
+    color:#FFA3A4;
+}
+.border-text-color{
+    border-color:#FFFFFF;
+}
+.font-color-dark{
+    color:#242038;
+}
+.card-shadow{
+    -webkit-box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
+-moz-box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
+box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
 }
