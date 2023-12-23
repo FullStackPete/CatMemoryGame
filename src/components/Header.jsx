@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-
 function TextDecoration({ children, customClassName }) {
   return (
     <div
@@ -16,21 +14,21 @@ function Header({ winStreak, highestWin }) {
   return (
     <div className="flex flex-col items-center font-color">
       <TextDecoration>
-        <p className=" text-6xl m-8 pacifico">Cat Memory Game</p>
+        <p className="text-4xl m-8 pacifico">Cat Memory Game</p>
       </TextDecoration>
 
       <div className="flex flex-row justify-between w-screen jost">
         <TextDecoration customClassName="border-l-0 rounded-l-none">
-          <p className=" m-4 text-3xl ">
+          <p className=" m-4 text-xl ">
             {winStreak > 0 ? (
               <>You guessed {winStreak} cards!</>
             ) : (
-              <>You didn't pick any cards yet!</>
+              <>You didn&apos;t pick any cards yet!</>
             )}
           </p>
         </TextDecoration>
         <TextDecoration customClassName="border-r-0 rounded-r-none">
-          <p className=" m-4 text-3xl">
+          <p className=" m-4 text-xl">
             {highestWin > 0 ? (
               <>Your best is {highestLocalStorageWinDisplay} guessed cards!</>
             ) : (

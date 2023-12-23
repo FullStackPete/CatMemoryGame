@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Cards } from "./components/Cards";
 import Instructions from "./components/Instructions";
+import HowToPlay from "./components/Howtoplay";
 import Header from "./components/Header";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [allData, setAllData] = useState([]);
   const [cardIsActive, setCardIsActive] = useState(false);
   const [win, setWin] = useState(0);
+  const [showInstructions,setShowInstructions] = useState(false);
   const [highestWin, setHighestWin] = useState(
     localStorage.getItem("highestWin") || 0
   );
@@ -22,11 +24,15 @@ function App() {
     }
     return array;
   };
-
+const handleSecondSideCardClick =()=>{
+  cardIsActive ? setCardIsActive(false) : setCardIsActive(true);
+}
+const handleHowToPlayClick = () =>{
+  showInstructions ? setShowInstructions(false) : setShowInstructions(true) ;
+  console.log("Current instructions state value: ", showInstructions);
+}
   const handleCardClick = (data) => {
-    if (!cardIsActive) {
-      setCardIsActive(true);
-    } else if (!pickedCards.includes(data.id)) {
+     if (!pickedCards.includes(data.id)) {
       setPickedCards((prev) => [...prev, data.id]);
       // console.log("Wybrales te karty:",pickedCards);
       setCardsLeft((prev) => prev.filter((item) => item !== data.id));
@@ -63,7 +69,7 @@ function App() {
     }
   }, [cardsLeft]);
   return (
-    <div className="background-color h-screen w-screen font-color">
+    <div className="background-color min-h-screen w-screen font-color">
       <Header winStreak={pickedCards.length} highestWin={highestWin} />
       <Cards
         setAllCards={setAllCards}
@@ -77,8 +83,10 @@ function App() {
         setCardIsActive={setCardIsActive}
         win={win}
         currentRound={currentRound}
+        handleSecondSideCardClick={handleSecondSideCardClick}
       />
-      <Instructions/>
+      <HowToPlay handleHowToPlayClick={handleHowToPlayClick}/>
+      { showInstructions && <Instructions handleHowToPlayClick={handleHowToPlayClick}/>}
     </div>
   );
 }

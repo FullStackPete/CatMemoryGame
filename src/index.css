@@ -43,3 +43,9 @@
 -moz-box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
 box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
 }
+.backcard-rotation{
+    transform:rotateY(180deg);
+}
+.frontcard-rotation{
+    transform:rotateY(-180deg);
+}

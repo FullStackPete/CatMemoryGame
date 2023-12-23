@@ -1,10 +1,10 @@
-function Icon({iconName,fontSize,color}) {
+function Icon({iconName,fontSize,color,onClick}) {
     const styledIcon = {
         fontSize:fontSize + "px",
         color:color,
     }
 
-    return (<span className="material-symbols-outlined" style={styledIcon} >
+    return (<span onClick={onClick}className="material-symbols-outlined" style={styledIcon} >
     {iconName}
     </span>  );
 }
