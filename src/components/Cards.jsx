@@ -41,21 +41,16 @@ export function Cards({
           <img
             onClick={() => handleSecondSideCardClick()}
             className={`card rounded-xl max-h-80 min-h-80 card-shadow transition-transform tiltcard hover:cursor-pointer ${
-              cardIsActive ? "backcard-rotation" : ""
+              cardIsActive ? "hidden" : ""
             }`}
             src={CardBackground}
           />
           <img
             onClick={() => handleCardClick(data)}
-            className={`card rounded-xl max-h-80 min-h-80 card-shadow transition-transform tiltcard hover:cursor-pointer ${
-              cardIsActive ? "" : "frontcard-rotation"
+            className={`card rounded-xl max-h-80 min-h-80 card-shadow tiltcard hover:cursor-pointer ${
+              cardIsActive ? "" : "hidden"
             }`}
-            key={data.id}
-            // The problem with loading time occurs on the line below (42). This is because
-            // the URL is being loaded AFTER the click. We need to change this behavior
-            // by loading the images when user enters the site, however not show them UNTIL
-            // the user presses the button.
-            // This behavior below is a common problem and should be deleted immediately.
+            key={data.id}            
             src={data.url}
             //
           />
