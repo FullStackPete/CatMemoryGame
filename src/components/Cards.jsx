@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import axios from "axios";
 import CardBackground from "../assets/card_bg.jpg";
-import Tilt from "react-vanilla-tilt";
+import Tilt from 'react-parallax-tilt';
+import ReactCardFlip from "react-card-flip";
 
 export function Cards({
   handleCardClick,
@@ -35,26 +36,32 @@ export function Cards({
   }, [setAllCards, lose, setCardIsActive, win]);
 
   return (
-    <div className="flex flex-row card-wrap items-center justify-center mt-8">
+    <div className="flex flex-row card-wrap items-center justify-center mt-8">      
       {allData.map((data) => (
-        <Tilt key={data.id} className="!p-0 !max-h-80 !w-60 !rounded-xl">
-          <img
-            onClick={() => handleSecondSideCardClick()}
-            className={`card rounded-xl max-h-80 min-h-80 card-shadow transition-transform tiltcard hover:cursor-pointer ${
-              cardIsActive ? "hidden" : ""
-            }`}
-            src={CardBackground}
-          />
-          <img
-            onClick={() => handleCardClick(data)}
-            className={`card rounded-xl max-h-80 min-h-80 card-shadow tiltcard hover:cursor-pointer ${
-              cardIsActive ? "" : "hidden"
-            }`}
-            key={data.id}            
-            src={data.url}
-            //
-          />
+        <>
+          
+        <Tilt
+        tiltMaxAngleX="15"
+        tiltMaxAngleY="15"        
+          key={data.id}
+          className="!p-0 !max-h-80 m-4 background-color !w-60 !rounded-xl"
+        >
+          <ReactCardFlip flipDirection="horizontal" isFlipped={cardIsActive}>
+              <img
+                onClick={() => handleSecondSideCardClick()}
+                className="object-cover aspect-[3/4] card rounded-xl max-h-80 min-h-80 card-shadow hover:cursor-pointer"
+                src={CardBackground}
+              />
+              <img
+                onClick={() => handleCardClick(data)}
+                className="object-cover aspect-[3/4] md:rounded-xl rounded-md max-h-80 min-h-80 card-shadow hover:cursor-pointer"
+                key={data.id}
+                src={data.url}
+                //
+              />
+          </ReactCardFlip>
         </Tilt>
+        </>
       ))}
     </div>
   );

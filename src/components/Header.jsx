@@ -1,7 +1,7 @@
 function TextDecoration({ children, customClassName }) {
   return (
     <div
-      className={`border-text-color border-8 text-background rounded-3xl mt-2 ${customClassName}`}
+      className={`border-text-color border-0 md:border-4 lg:border-8 md:bg-[#242038] rounded-3xl mt-4 ${customClassName}`}
     >
       {children}
     </div>
@@ -12,30 +12,32 @@ function Header({ winStreak, highestWin }) {
   localStorage.setItem("highestWin", highestWin);
   let highestLocalStorageWinDisplay = localStorage.getItem("highestWin");
   return (
-    <div className="flex flex-col items-center font-color">
-      <TextDecoration>
-        <p className="text-4xl m-8 pacifico">Cat Memory Game</p>
-      </TextDecoration>
+    <div className="border-[#242038] border-b-8 rounded-b-3xl text-background md:border-none">
+      <div className="flex flex-col items-center font-color md:bg-[#A891D4]">
+        <TextDecoration>
+          <p className="text-4xl md:m-8 pacifico">Cat Memory Game</p>
+        </TextDecoration>
 
-      <div className="flex flex-row justify-between w-screen jost">
-        <TextDecoration customClassName="border-l-0 rounded-l-none">
-          <p className=" m-4 text-xl ">
-            {winStreak > 0 ? (
-              <>You guessed {winStreak} cards!</>
-            ) : (
-              <>You didn&apos;t pick any cards yet!</>
-            )}
-          </p>
-        </TextDecoration>
-        <TextDecoration customClassName="border-r-0 rounded-r-none">
-          <p className=" m-4 text-xl">
-            {highestWin > 0 ? (
-              <>Your best is {highestLocalStorageWinDisplay} guessed cards!</>
-            ) : (
-              <>Start playing to set your best score!</>
-            )}
-          </p>
-        </TextDecoration>
+        <div className="flex flex-row justify-between w-screen jost">
+          <TextDecoration customClassName="border-l-0 md:border-l-0 lg:border-l-0 rounded-l-none">
+            <p className=" m-4 text-xl ">
+              {winStreak > 0 ? (
+                <>You guessed {winStreak} cards!</>
+              ) : (
+                <>You didn&apos;t pick any cards yet!</>
+              )}
+            </p>
+          </TextDecoration>
+          <TextDecoration customClassName="border-r-0 md:border-r-0 lg:border-r-0 rounded-r-none">
+            <p className="m-4 text-xl text-right">
+              {highestWin > 0 ? (
+                <>Your best is {highestLocalStorageWinDisplay} guessed cards!</>
+              ) : (
+                <>Start playing to set your best score!</>
+              )}
+            </p>
+          </TextDecoration>
+        </div>
       </div>
     </div>
   );

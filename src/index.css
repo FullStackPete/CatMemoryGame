@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    overflow: hidden;
+}
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -10,7 +13,7 @@
   'opsz' 24
 }
 
-.card{
+.card{    
     object-fit:cover;
     aspect-ratio: 3/4;
     
@@ -48,4 +51,7 @@ box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
 }
 .frontcard-rotation{
     transform:rotateY(-180deg);
+}
+.mdbg-violet{
+    background-color:#A891D4;
 }

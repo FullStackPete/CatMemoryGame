@@ -3,6 +3,7 @@ import { Cards } from "./components/Cards";
 import Instructions from "./components/Instructions";
 import HowToPlay from "./components/Howtoplay";
 import Header from "./components/Header";
+import CatImage from "./components/CatImage";
 
 function App() {
   const [currentRound, setCurrentRound] = useState(3);
@@ -13,7 +14,7 @@ function App() {
   const [allData, setAllData] = useState([]);
   const [cardIsActive, setCardIsActive] = useState(false);
   const [win, setWin] = useState(0);
-  const [showInstructions,setShowInstructions] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
   const [highestWin, setHighestWin] = useState(
     localStorage.getItem("highestWin") || 0
   );
@@ -24,15 +25,15 @@ function App() {
     }
     return array;
   };
-const handleSecondSideCardClick =()=>{
-  cardIsActive ? setCardIsActive(false) : setCardIsActive(true);
-}
-const handleHowToPlayClick = () =>{
-  showInstructions ? setShowInstructions(false) : setShowInstructions(true) ;
-  console.log("Current instructions state value: ", showInstructions);
-}
+  const handleSecondSideCardClick = () => {
+    setCardIsActive(!cardIsActive);
+  };
+  const handleHowToPlayClick = () => {
+    setShowInstructions(!showInstructions);
+    console.log("Current instructions state value: ", showInstructions);
+  };
   const handleCardClick = (data) => {
-     if (!pickedCards.includes(data.id)) {
+    if (!pickedCards.includes(data.id)) {
       setPickedCards((prev) => [...prev, data.id]);
       // console.log("Wybrales te karty:",pickedCards);
       setCardsLeft((prev) => prev.filter((item) => item !== data.id));
@@ -55,9 +56,9 @@ const handleHowToPlayClick = () =>{
   useEffect(() => {
     //Win Logic
     console.log("Cards left: ", cardsLeft);
-    console.log("useEffect win Logic highest win ",highestWin);
+    console.log("useEffect win Logic highest win ", highestWin);
 
-    if(pickedCards.length>highestWin){
+    if (pickedCards.length > highestWin) {
       setHighestWin(pickedCards.length);
       // console.log("useEffect win Logic highest win ",highestWin);
     }
@@ -85,8 +86,11 @@ const handleHowToPlayClick = () =>{
         currentRound={currentRound}
         handleSecondSideCardClick={handleSecondSideCardClick}
       />
-      <HowToPlay handleHowToPlayClick={handleHowToPlayClick}/>
-      { showInstructions && <Instructions handleHowToPlayClick={handleHowToPlayClick}/>}
+      <HowToPlay handleHowToPlayClick={handleHowToPlayClick} />
+      {showInstructions && (
+        <Instructions handleHowToPlayClick={handleHowToPlayClick} />
+      )}
+      <CatImage/>
     </div>
   );
 }
