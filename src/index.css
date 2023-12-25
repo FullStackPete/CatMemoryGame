@@ -3,26 +3,26 @@
 @tailwind utilities;
 
 body{
-    overflow: hidden;
+    background-color:#A891D4;
 }
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
   'wght' 400,
   'GRAD' 0,
-  'opsz' 24
+  'opsz' 24  
 }
-
-.card{    
-    object-fit:cover;
-    aspect-ratio: 3/4;
-    
+.react-card-front{
+    transform-style: initial;
 }
+.react-card-back{
+transform-style: initial;}
 .pacifico{
     font-family: 'Pacifico', cursive;
 }
 .jost{
     font-family: 'Jost', sans-serif;
+    
 }
 
 .background-color{
@@ -46,12 +46,7 @@ body{
 -moz-box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
 box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
 }
-.backcard-rotation{
-    transform:rotateY(180deg);
-}
-.frontcard-rotation{
-    transform:rotateY(-180deg);
-}
+
 .mdbg-violet{
     background-color:#A891D4;
 }

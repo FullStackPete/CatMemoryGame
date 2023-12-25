@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 import CardBackground from "../assets/card_bg.jpg";
-import Tilt from 'react-parallax-tilt';
+import Tilt from "react-parallax-tilt";
 import ReactCardFlip from "react-card-flip";
 
 export function Cards({
@@ -12,11 +12,12 @@ export function Cards({
   allData,
   setAllData,
   cardIsActive,
-  setCardIsActive,
+  setCardIsActive,  
   win,
   currentRound,
   handleSecondSideCardClick,
 }) {
+  const chunkSize = 3; // Możesz dostosować wielkość grupy według potrzeb
   const CatApi = `https://api.thecatapi.com/v1/images/search?limit=${currentRound}&api_key=${
     import.meta.env.VITE_CatApiKey
   }`;
@@ -32,36 +33,50 @@ export function Cards({
         console.log("Error fetching data: ", err);
       }
     };
+    
     fetchData();
-  }, [setAllCards, lose, setCardIsActive, win]);
+  }, [lose, win]);
+
+
+  const chunkedData = Array.from(
+    { length: Math.ceil(allData.length / chunkSize) },
+    (_, index) => allData.slice(index * chunkSize, (index + 1) * chunkSize)
+  );
 
   return (
-    <div className="flex flex-row card-wrap items-center justify-center mt-8">      
-      {allData.map((data) => (
-        <>
-          
-        <Tilt
-        tiltMaxAngleX="15"
-        tiltMaxAngleY="15"        
-          key={data.id}
-          className="!p-0 !max-h-80 m-4 background-color !w-60 !rounded-xl"
-        >
-          <ReactCardFlip flipDirection="horizontal" isFlipped={cardIsActive}>
-              <img
-                onClick={() => handleSecondSideCardClick()}
-                className="object-cover aspect-[3/4] card rounded-xl max-h-80 min-h-80 card-shadow hover:cursor-pointer"
-                src={CardBackground}
-              />
-              <img
-                onClick={() => handleCardClick(data)}
-                className="object-cover aspect-[3/4] md:rounded-xl rounded-md max-h-80 min-h-80 card-shadow hover:cursor-pointer"
+    <div className="flex flex-col items-center justify-center mt-8">
+      {chunkedData.map((chunk, index) => (
+        <div className="flex flex-row" key={index}>
+          {chunk.map((data) => (
+            
+            <>
+              <Tilt
+                tiltMaxAngleX="15"
+                tiltMaxAngleY="15"
                 key={data.id}
-                src={data.url}
-                //
-              />
-          </ReactCardFlip>
-        </Tilt>
-        </>
+                className="!p-0 m-4 background-color  !rounded-xl aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80"
+              >
+                <ReactCardFlip
+                  flipDirection="horizontal"
+                  isFlipped={cardIsActive}
+                >
+                  <img
+                    onClick={() => handleCardClick()}
+                    className="aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80 rounded-xl card-shadow hover:cursor-pointer"
+                    src={CardBackground}
+                  />
+                  <img
+                    onClick={() => handleCardClick(data)}
+                    className="object-cover aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80 rounded-md card-shadow hover:cursor-pointer"
+                    key={data.id}
+                    src={data.url}
+                    //
+                  />
+                </ReactCardFlip>
+              </Tilt>
+            </>
+          ))}
+        </div>
       ))}
     </div>
   );

@@ -18,7 +18,7 @@ function Header({ winStreak, highestWin }) {
           <p className="text-4xl md:m-8 pacifico">Cat Memory Game</p>
         </TextDecoration>
 
-        <div className="flex flex-row justify-between w-screen jost">
+        <div className="flex flex-row justify-between w-full jost">
           <TextDecoration customClassName="border-l-0 md:border-l-0 lg:border-l-0 rounded-l-none">
             <p className=" m-4 text-xl ">
               {winStreak > 0 ? (

@@ -25,23 +25,25 @@ function App() {
     }
     return array;
   };
-  const handleSecondSideCardClick = () => {
-    setCardIsActive(!cardIsActive);
-  };
+  
   const handleHowToPlayClick = () => {
     setShowInstructions(!showInstructions);
     console.log("Current instructions state value: ", showInstructions);
   };
+
   const handleCardClick = (data) => {
+    setCardIsActive(false);
+    setTimeout(()=>{
+      setCardIsActive(true);
+    },500);
     if (!pickedCards.includes(data.id)) {
       setPickedCards((prev) => [...prev, data.id]);
       // console.log("Wybrales te karty:",pickedCards);
-      setCardsLeft((prev) => prev.filter((item) => item !== data.id));
-      shuffleData(allData);
+      setCardsLeft((prev) => prev.filter((item) => item !== data.id));   
+      shuffleData(allData);      
+      
       if (pickedCards.length >= highestWin) {
-        setHighestWin(pickedCards.length);
-        console.log("twoja najwieksza wygrana to: ", pickedCards.length);
-        console.log("Bug?:", pickedCards);
+        setHighestWin(pickedCards.length);        
       }
     } else {
       //Lose Logic
@@ -49,28 +51,23 @@ function App() {
       setLose((prev) => prev + 1);
       setCurrentRound(3);
       setPickedCards([]);
-      setCardIsActive(false);
     }
   };
 
   useEffect(() => {
-    //Win Logic
+    
     console.log("Cards left: ", cardsLeft);
-    console.log("useEffect win Logic highest win ", highestWin);
-
     if (pickedCards.length > highestWin) {
       setHighestWin(pickedCards.length);
-      // console.log("useEffect win Logic highest win ",highestWin);
     }
 
     if (cardsLeft.length === 0) {
       setWin((prev) => prev + 1);
       setCurrentRound((prev) => prev + 2);
-      setCardIsActive(false);
     }
   }, [cardsLeft]);
   return (
-    <div className="background-color min-h-screen w-screen font-color">
+    <div className="min-h-screen font-color">
       <Header winStreak={pickedCards.length} highestWin={highestWin} />
       <Cards
         setAllCards={setAllCards}
@@ -84,13 +81,12 @@ function App() {
         setCardIsActive={setCardIsActive}
         win={win}
         currentRound={currentRound}
-        handleSecondSideCardClick={handleSecondSideCardClick}
       />
       <HowToPlay handleHowToPlayClick={handleHowToPlayClick} />
       {showInstructions && (
         <Instructions handleHowToPlayClick={handleHowToPlayClick} />
       )}
-      <CatImage/>
+      <CatImage />
     </div>
   );
 }
