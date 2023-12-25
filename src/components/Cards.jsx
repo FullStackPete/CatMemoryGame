@@ -12,10 +12,8 @@ export function Cards({
   allData,
   setAllData,
   cardIsActive,
-  setCardIsActive,  
   win,
   currentRound,
-  handleSecondSideCardClick,
 }) {
   const chunkSize = 3; // Możesz dostosować wielkość grupy według potrzeb
   const CatApi = `https://api.thecatapi.com/v1/images/search?limit=${currentRound}&api_key=${

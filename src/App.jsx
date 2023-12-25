@@ -28,7 +28,6 @@ function App() {
   
   const handleHowToPlayClick = () => {
     setShowInstructions(!showInstructions);
-    console.log("Current instructions state value: ", showInstructions);
   };
 
   const handleCardClick = (data) => {
@@ -38,7 +37,6 @@ function App() {
     },500);
     if (!pickedCards.includes(data.id)) {
       setPickedCards((prev) => [...prev, data.id]);
-      // console.log("Wybrales te karty:",pickedCards);
       setCardsLeft((prev) => prev.filter((item) => item !== data.id));   
       shuffleData(allData);      
       
@@ -47,7 +45,6 @@ function App() {
       }
     } else {
       //Lose Logic
-      console.log("Game over! You already picked this card!!!", pickedCards);
       setLose((prev) => prev + 1);
       setCurrentRound(3);
       setPickedCards([]);
@@ -56,7 +53,6 @@ function App() {
 
   useEffect(() => {
     
-    console.log("Cards left: ", cardsLeft);
     if (pickedCards.length > highestWin) {
       setHighestWin(pickedCards.length);
     }
