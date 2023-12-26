@@ -15,6 +15,7 @@ function App() {
   const [cardIsActive, setCardIsActive] = useState(false);
   const [win, setWin] = useState(0);
   const [showInstructions, setShowInstructions] = useState(false);
+  const [render, setRender] = useState(-1);
   const [highestWin, setHighestWin] = useState(
     localStorage.getItem("highestWin") || 0
   );
@@ -25,26 +26,33 @@ function App() {
     }
     return array;
   };
-  
+
   const handleHowToPlayClick = () => {
     setShowInstructions(!showInstructions);
+  };
+  const handleBackCardClick = () => {
+    setCardIsActive(!cardIsActive);
   };
 
   const handleCardClick = (data) => {
     setCardIsActive(false);
-    setTimeout(()=>{
-      setCardIsActive(true);
-    },500);
     if (!pickedCards.includes(data.id)) {
       setPickedCards((prev) => [...prev, data.id]);
-      setCardsLeft((prev) => prev.filter((item) => item !== data.id));   
-      shuffleData(allData);      
-      
+      setCardsLeft((prev) => prev.filter((item) => item !== data.id));
+
+        setTimeout(()=>{shuffleData(allData);},100)
+      setTimeout(() => {
+        setRender((prev) => prev + 1);
+      }, 650);
+      setTimeout(() => {
+        setCardIsActive(true);
+      }, 1000);
       if (pickedCards.length >= highestWin) {
-        setHighestWin(pickedCards.length);        
+        setHighestWin(pickedCards.length);
       }
     } else {
       //Lose Logic
+      setCardIsActive(false);
       setLose((prev) => prev + 1);
       setCurrentRound(3);
       setPickedCards([]);
@@ -52,20 +60,19 @@ function App() {
   };
 
   useEffect(() => {
-    
     if (pickedCards.length > highestWin) {
       setHighestWin(pickedCards.length);
     }
-
     if (cardsLeft.length === 0) {
       setWin((prev) => prev + 1);
       setCurrentRound((prev) => prev + 2);
     }
-  }, [cardsLeft]);
+  }, [cardsLeft, highestWin, pickedCards.length]);
   return (
     <div className="min-h-screen font-color">
       <Header winStreak={pickedCards.length} highestWin={highestWin} />
       <Cards
+        handleBackCardClick={handleBackCardClick}
         setAllCards={setAllCards}
         handleCardClick={handleCardClick}
         setCardsLeft={setCardsLeft}

@@ -5,6 +5,7 @@ import Tilt from "react-parallax-tilt";
 import ReactCardFlip from "react-card-flip";
 
 export function Cards({
+  handleBackCardClick,
   handleCardClick,
   setAllCards,
   setCardsLeft,
@@ -31,10 +32,9 @@ export function Cards({
         console.log("Error fetching data: ", err);
       }
     };
-    
-    fetchData();
-  }, [lose, win]);
 
+    fetchData();
+  }, [lose, win, CatApi, setAllCards, setAllData, setCardsLeft]);
 
   const chunkedData = Array.from(
     { length: Math.ceil(allData.length / chunkSize) },
@@ -44,35 +44,30 @@ export function Cards({
   return (
     <div className="flex flex-col items-center justify-center mt-8">
       {chunkedData.map((chunk, index) => (
-        <div className="flex flex-row" key={index}>
+        <div className="flex flex-row" key={`chunk-${index}`}>
           {chunk.map((data) => (
-            
-            <>
-              <Tilt
-                tiltMaxAngleX="15"
-                tiltMaxAngleY="15"
-                key={data.id}
-                className="!p-0 m-4 background-color  !rounded-xl aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80"
+            <Tilt
+              tiltMaxAngleX="15"
+              tiltMaxAngleY="15"
+              key={data.id} // Unique key for each Tilt component
+              className="!p-0 m-4 background-color !rounded-xl aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80"
+            >
+              <ReactCardFlip
+                flipDirection="horizontal"
+                isFlipped={cardIsActive}
               >
-                <ReactCardFlip
-                  flipDirection="horizontal"
-                  isFlipped={cardIsActive}
-                >
-                  <img
-                    onClick={() => handleCardClick()}
-                    className="aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80 rounded-xl card-shadow hover:cursor-pointer"
-                    src={CardBackground}
-                  />
-                  <img
-                    onClick={() => handleCardClick(data)}
-                    className="object-cover aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80 rounded-md card-shadow hover:cursor-pointer"
-                    key={data.id}
-                    src={data.url}
-                    //
-                  />
-                </ReactCardFlip>
-              </Tilt>
-            </>
+                <img
+                  onClick={() => handleBackCardClick()}
+                  className="aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80 rounded-xl card-shadow hover:cursor-pointer"
+                  src={CardBackground}
+                />
+                <img
+                  onClick={() => handleCardClick(data)}
+                  className="object-cover aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80 rounded-md card-shadow hover:cursor-pointer"
+                  src={data.url}
+                />
+              </ReactCardFlip>
+            </Tilt>
           ))}
         </div>
       ))}
