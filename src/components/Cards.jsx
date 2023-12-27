@@ -42,15 +42,18 @@ export function Cards({
   );
 
   return (
-    <div className="flex flex-col items-center justify-center mt-8">
+    <div className="flex flex-col justify-center mt-8 md:mt-0 items-center md:h-full">
       {chunkedData.map((chunk, index) => (
-        <div className="flex flex-row" key={`chunk-${index}`}>
+        <div
+          className="flex justify-center items-center flex-row mx-2"
+          key={`chunk-${index}`}
+        >
           {chunk.map((data) => (
             <Tilt
               tiltMaxAngleX="15"
               tiltMaxAngleY="15"
               key={data.id} // Unique key for each Tilt component
-              className="!p-0 m-4 background-color !rounded-xl aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80"
+              className="!p-0 my-2 mx-2 md:my-4 md:mx-4 background-color !rounded-md aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80"
             >
               <ReactCardFlip
                 flipDirection="horizontal"
@@ -58,12 +61,12 @@ export function Cards({
               >
                 <img
                   onClick={() => handleBackCardClick()}
-                  className="aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80 rounded-xl card-shadow hover:cursor-pointer"
+                  className="aspect-[3/4] max-h-36 min-h-36 md:min-h-60 md:max-h-60 lg:max-h-80 lg:min-h-80 rounded-md card-shadow hover:cursor-pointer"
                   src={CardBackground}
                 />
                 <img
                   onClick={() => handleCardClick(data)}
-                  className="object-cover aspect-[3/4] max-h-60 min-h-60 lg:max-h-80 lg:min-h-80 rounded-md card-shadow hover:cursor-pointer"
+                  className="object-cover aspect-[3/4] max-h-36 min-h-36 md:min-h-60 md:max-h-60 lg:max-h-80 lg:min-h-80 rounded-md card-shadow hover:cursor-pointer"
                   src={data.url}
                 />
               </ReactCardFlip>

@@ -4,13 +4,14 @@ import Instructions from "./components/Instructions";
 import HowToPlay from "./components/Howtoplay";
 import Header from "./components/Header";
 import CatImage from "./components/CatImage";
+import Lose from "./components/Lose";
 
 function App() {
   const [currentRound, setCurrentRound] = useState(3);
   const [pickedCards, setPickedCards] = useState([]);
   const [allCards, setAllCards] = useState([]);
   const [cardsLeft, setCardsLeft] = useState([""]);
-  const [lose, setLose] = useState(0);
+  const [lose, setLose] = useState(false);
   const [allData, setAllData] = useState([]);
   const [cardIsActive, setCardIsActive] = useState(false);
   const [win, setWin] = useState(0);
@@ -40,10 +41,12 @@ function App() {
       setPickedCards((prev) => [...prev, data.id]);
       setCardsLeft((prev) => prev.filter((item) => item !== data.id));
 
-        setTimeout(()=>{shuffleData(allData);},100)
+      setTimeout(() => {
+        shuffleData(allData);
+      }, 100);
       setTimeout(() => {
         setRender((prev) => prev + 1);
-      }, 650);
+      }, 450);
       setTimeout(() => {
         setCardIsActive(true);
       }, 1000);
@@ -52,8 +55,12 @@ function App() {
       }
     } else {
       //Lose Logic
-      setCardIsActive(false);
-      setLose((prev) => prev + 1);
+      setLose(true);
+      setTimeout(() => {
+        setLose(false);
+        setCardIsActive(false);
+      }, 2000);
+
       setCurrentRound(3);
       setPickedCards([]);
     }
@@ -69,8 +76,9 @@ function App() {
     }
   }, [cardsLeft, highestWin, pickedCards.length]);
   return (
-    <div className="min-h-screen font-color">
+    <div className="min-h-screen flex flex-col font-color">
       <Header winStreak={pickedCards.length} highestWin={highestWin} />
+      <div className="flex-grow">
       <Cards
         handleBackCardClick={handleBackCardClick}
         setAllCards={setAllCards}
@@ -85,11 +93,14 @@ function App() {
         win={win}
         currentRound={currentRound}
       />
-      <HowToPlay handleHowToPlayClick={handleHowToPlayClick} />
       {showInstructions && (
         <Instructions handleHowToPlayClick={handleHowToPlayClick} />
       )}
       <CatImage />
+      {lose && <Lose setLose={setLose} lose={lose} />}
+      </div>
+      <HowToPlay handleHowToPlayClick={handleHowToPlayClick} />
+
     </div>
   );
 }

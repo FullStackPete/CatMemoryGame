@@ -2,51 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background-color:#A891D4;
+body {
+  background-color: #a891d4;
 }
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24  
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
-.react-card-front{
-    transform-style: initial;
+.react-card-front {
+  transform-style: initial;
 }
-.react-card-back{
-transform-style: initial;}
-.pacifico{
-    font-family: 'Pacifico', cursive;
+.react-card-back {
+  transform-style: initial;
 }
-.jost{
-    font-family: 'Jost', sans-serif;
-    
+.pacifico {
+  font-family: "Pacifico", cursive;
+}
+.jost {
+  font-family: "Jost", sans-serif;
 }
 
-.background-color{
-    background-color:#A891D4;
+.background-color {
+  background-color: #a891d4;
 }
 
-.text-background{
-    background-color:#242038;
+.text-background {
+  background-color: #242038;
 }
-.font-color{
-    color:#FFA3A4;
+.font-color {
+  color: #ffa3a4;
 }
-.border-text-color{
-    border-color:#FFFFFF;
+.border-text-color {
+  border-color: #ffffff;
 }
-.font-color-dark{
-    color:#242038;
+.font-color-dark {
+  color: #242038;
 }
-.card-shadow{
-    -webkit-box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
--moz-box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
-box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
+.card-shadow {
+  -webkit-box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
+  box-shadow: 0px 4px 22px 1px rgba(66, 68, 90, 1);
 }
 
-.mdbg-violet{
-    background-color:#A891D4;
+.mdbg-violet {
+  background-color: #a891d4;
+}
+
+
+.show{
+    transition: all 0.5s ease-in-out;
+    transform: translateX(-50%);
+
+}
+.hide{
+    transition: all 0.5s ease-in-out;
+    transform: translateX(-120vw);
+
 }
