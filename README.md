@@ -2,12 +2,11 @@
 
 ![Game Images](https://github.com/FullStackPete/CatMemoryGame/assets/123159152/18c8b559-fd43-4f54-bf62-3742608eb438)
 
+[Live on netlify! Click here.](https://luxury-stroopwafel-b36b51.netlify.app/)
 
 A memory game built with React and Tailwind CSS, featuring parallax tilt effects and card flipping animation. The game fetches images of cats from TheCatAPI to make it more fun!
 
-## Online
 
-[Live on Netlify](https://luxury-stroopwafel-b36b51.netlify.app/)
 
 ## Features
 
