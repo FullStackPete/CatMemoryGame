@@ -1,4 +1,10 @@
-function TextDecoration({ children, customClassName }) {
+import { ReactNode } from "react";
+
+type TextDecorationProps = {
+  children: ReactNode;
+  customClassName?: string;
+};
+function TextDecoration({ children, customClassName }: TextDecorationProps) {
   return (
     <div
       className={`border-text-color border-0 md:border-4 lg:border-8 md:bg-[#242038] rounded-3xl mt-4 ${customClassName}`}
@@ -7,15 +13,20 @@ function TextDecoration({ children, customClassName }) {
     </div>
   );
 }
-
-function Header({ winStreak, highestWin }) {
-  localStorage.setItem("highestWin", highestWin);
+type HeaderProps = {
+  winStreak: number;
+  highestWin: number;
+};
+function Header({ winStreak, highestWin }: HeaderProps) {
+  localStorage.setItem("highestWin", highestWin.toString());
   let highestLocalStorageWinDisplay = localStorage.getItem("highestWin");
   return (
     <div className="border-[#242038] border-b-8 rounded-b-3xl text-background md:border-none">
       <div className="flex flex-col  items-center font-color md:bg-[#A891D4]">
         <TextDecoration>
-          <p className="text-center text-3xl md:text-4xl md:m-8 pacifico">Cat Memory Game</p>
+          <p className="text-center text-3xl md:text-4xl md:m-8 pacifico">
+            Cat Memory Game
+          </p>
         </TextDecoration>
 
         <div className="flex flex-row justify-between w-full jost">

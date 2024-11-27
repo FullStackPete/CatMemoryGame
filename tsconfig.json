@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "types": "vite/client",
+    "target": "ES6", // Nowoczesna wersja ECMAScript
+    "module": "ESNext", // Nowoczesne moduły ES6
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ], // Biblioteki dla React i nowoczesnego JS
+    "jsx": "react-jsx", // Typ JSX, wymagany w React 17+
+    "strict": true, // Włącz tryb ścisły
+    "moduleResolution": "node", // Rozwiązywanie modułów w stylu Node.js
+    "esModuleInterop": true, // Poprawa wsparcia dla CommonJS i ES Modules
+    "skipLibCheck": true, // Pomija sprawdzanie bibliotek
+    "resolveJsonModule": true, // Wsparcie dla importowania JSON
+    "allowSyntheticDefaultImports": true, // Wsparcie dla importów domyślnych
+    "forceConsistentCasingInFileNames": true // Wymusza zgodność wielkości liter
+  },
+  "include": [
+    "src",
+    "vite-env.d.ts"
+  ], // Folder z kodem źródłowym
+  "exclude": [
+    "node_modules"
+  ] // Wykluczanie katalogu z paczkami
+}
