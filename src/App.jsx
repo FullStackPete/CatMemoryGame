@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Cards } from "./components/Cards";
 import Instructions from "./components/Instructions";
-import HowToPlay from "./components/Howtoplay";
+import HowToPlay from "./components/HowToPlay";
 import Header from "./components/Header";
 import CatImage from "./components/CatImage";
 import Lose from "./components/Lose";

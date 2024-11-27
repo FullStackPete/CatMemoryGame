@@ -34,11 +34,11 @@ export function Cards({
     };
 
     fetchData();
-  }, [lose, win, CatApi, setAllCards, setAllData, setCardsLeft]);
+  }, [lose, win]);
 
   const chunkedData = Array.from(
     { length: Math.ceil(allData.length / chunkSize) },
-    (_, index) => allData.slice(index * chunkSize, (index + 1) * chunkSize)
+    (_, index) => allData.slice(index * chunkSize, (index + 1) * chunkSize),
   );
 
   return (
