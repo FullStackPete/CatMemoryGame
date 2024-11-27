@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
-import { Cards } from "./components/Cards";
-import Instructions from "./components/Instructions";
-import HowToPlay from "./components/HowToPlay";
-import Header from "./components/Header";
-import CatImage from "./components/CatImage";
-import Lose from "./components/Lose";
-import { CardType } from "./types";
+import { Cards } from "../components/Cards";
+import Instructions from "../components/Instructions";
+import HowToPlay from "../components/HowToPlay";
+import Header from "../components/Header";
+import CatImage from "../components/CatImage";
+import Lose from "../components/Lose";
+import { CardType, favoriteCardType } from "../types";
 
-function App() {
+function HomePage() {
+  const [favorite, setFavorite] = useState<favoriteCardType[]>(() =>
+    JSON.parse(localStorage.getItem("cmgamefavorites") || "[]"),
+  );
   const [currentRound, setCurrentRound] = useState<number>(3);
   const [pickedCards, setPickedCards] = useState<string[]>([]);
   const [cardsLeft, setCardsLeft] = useState<string[]>([""]);
@@ -54,7 +57,6 @@ function App() {
         setHighestWin(pickedCards.length);
       }
     } else {
-      //Lose Logic
       setLose(true);
       setTimeout(() => {
         setLose(false);
@@ -80,6 +82,8 @@ function App() {
       <Header winStreak={pickedCards.length} highestWin={highestWin} />
       <div className="flex-grow">
         <Cards
+          favorite={favorite}
+          s etFavorite={setFavorite}
           handleBackCardClick={handleBackCardClick}
           handleCardClick={handleCardClick}
           setCardsLeft={setCardsLeft}
@@ -101,4 +105,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;

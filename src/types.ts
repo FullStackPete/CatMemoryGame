@@ -5,3 +5,7 @@ export type CardType = {
   id: string;
   url: string;
 };
+export type favoriteCardType = {
+id:string
+  url:string
+}

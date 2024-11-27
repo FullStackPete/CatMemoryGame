@@ -1,23 +1,12 @@
-import { ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
+import TextDecoration from "./TextDecoration";
 
-type TextDecorationProps = {
-  children: ReactNode;
-  customClassName?: string;
-};
-function TextDecoration({ children, customClassName }: TextDecorationProps) {
-  return (
-    <div
-      className={`border-text-color border-0 md:border-4 lg:border-8 md:bg-[#242038] rounded-3xl mt-4 ${customClassName}`}
-    >
-      {children}
-    </div>
-  );
-}
 type HeaderProps = {
   winStreak: number;
   highestWin: number;
 };
 function Header({ winStreak, highestWin }: HeaderProps) {
+  const navigate = useNavigate();
   localStorage.setItem("highestWin", highestWin.toString());
   let highestLocalStorageWinDisplay = localStorage.getItem("highestWin");
   return (
@@ -28,7 +17,12 @@ function Header({ winStreak, highestWin }: HeaderProps) {
             Cat Memory Game
           </p>
         </TextDecoration>
-
+        <div
+          onClick={() => navigate("/favorites")}
+          className="pacifico text-2xl underline justify-center md:text-[#242038] cursor-pointer mt-4"
+        >
+          Favorites
+        </div>
         <div className="flex flex-row justify-between w-full jost">
           <TextDecoration customClassName="border-l-0 md:border-l-0 lg:border-l-0 rounded-l-none">
             <p className="mt-2 mx-4 md:m-4 text-xl ">

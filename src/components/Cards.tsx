@@ -3,7 +3,8 @@ import axios from "axios";
 import CardBackground from "../assets/card_bg.jpg";
 import Tilt from "react-parallax-tilt";
 import ReactCardFlip from "react-card-flip";
-import { CardType } from "../types";
+import { CardType, favoriteCardType } from "../types";
+import CatWithFavorite from "./CatWithFavorite";
 
 type CardsProps = {
   handleBackCardClick: () => void;
@@ -15,9 +16,13 @@ type CardsProps = {
   cardIsActive: boolean;
   win: number;
   currentRound: number;
+  favorite: favoriteCardType[];
+  setFavorite: Dispatch<SetStateAction<favoriteCardType[]>>;
 };
 
 export function Cards({
+  setFavorite,
+  favorite,
   handleBackCardClick,
   handleCardClick,
   setCardsLeft,
@@ -28,7 +33,7 @@ export function Cards({
   win,
   currentRound,
 }: CardsProps) {
-  const chunkSize = 3; // Możesz dostosować wielkość grupy według potrzeb
+  const chunkSize = 3;
   const CatApi = `https://api.thecatapi.com/v1/images/search?limit=${currentRound}&api_key=${
     import.meta.env.VITE_CatApiKey
   }`;
@@ -76,10 +81,12 @@ export function Cards({
                   className="aspect-[3/4] max-h-36 min-h-36 md:min-h-60 md:max-h-60 lg:max-h-80 lg:min-h-80 rounded-md card-shadow hover:cursor-pointer"
                   src={CardBackground}
                 />
-                <img
-                  onClick={() => handleCardClick(data)}
-                  className="object-cover aspect-[3/4] max-h-36 min-h-36 md:min-h-60 md:max-h-60 lg:max-h-80 lg:min-h-80 rounded-md card-shadow hover:cursor-pointer"
-                  src={data.url}
+                <CatWithFavorite
+                  url={data.url}
+                  catId={data.id}
+                  favorite={favorite}
+                  handleCardClick={() => handleCardClick(data)}
+                  setFavorite={setFavorite}
                 />
               </ReactCardFlip>
             </Tilt>
