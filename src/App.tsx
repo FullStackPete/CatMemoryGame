@@ -5,22 +5,22 @@ import HowToPlay from "./components/HowToPlay";
 import Header from "./components/Header";
 import CatImage from "./components/CatImage";
 import Lose from "./components/Lose";
+import { CardType } from "./types";
 
 function App() {
-  const [currentRound, setCurrentRound] = useState(3);
-  const [pickedCards, setPickedCards] = useState([]);
-  const [allCards, setAllCards] = useState([]);
-  const [cardsLeft, setCardsLeft] = useState([""]);
-  const [lose, setLose] = useState(false);
-  const [allData, setAllData] = useState([]);
-  const [cardIsActive, setCardIsActive] = useState(false);
-  const [win, setWin] = useState(0);
-  const [showInstructions, setShowInstructions] = useState(false);
-  const [render, setRender] = useState(-1);
-  const [highestWin, setHighestWin] = useState(
-    localStorage.getItem("highestWin") || 0
+  const [currentRound, setCurrentRound] = useState<number>(3);
+  const [pickedCards, setPickedCards] = useState<string[]>([]);
+  const [cardsLeft, setCardsLeft] = useState<string[]>([""]);
+  const [lose, setLose] = useState<boolean>(false);
+  const [allData, setAllData] = useState<CardType[]>([]);
+  const [cardIsActive, setCardIsActive] = useState<boolean>(false);
+  const [win, setWin] = useState<number>(0);
+  const [showInstructions, setShowInstructions] = useState<boolean>(false);
+  const [_, setRender] = useState<number>(-1);
+  const [highestWin, setHighestWin] = useState<number>(
+    Number(localStorage.getItem("highestWin")) || 0,
   );
-  const shuffleData = (array) => {
+  const shuffleData = (array: CardType[]) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -35,7 +35,7 @@ function App() {
     setCardIsActive(!cardIsActive);
   };
 
-  const handleCardClick = (data) => {
+  const handleCardClick = (data: CardType) => {
     setCardIsActive(false);
     if (!pickedCards.includes(data.id)) {
       setPickedCards((prev) => [...prev, data.id]);
@@ -79,28 +79,24 @@ function App() {
     <div className="min-h-screen flex flex-col font-color">
       <Header winStreak={pickedCards.length} highestWin={highestWin} />
       <div className="flex-grow">
-      <Cards
-        handleBackCardClick={handleBackCardClick}
-        setAllCards={setAllCards}
-        handleCardClick={handleCardClick}
-        setCardsLeft={setCardsLeft}
-        lose={lose}
-        allCards={allCards}
-        setAllData={setAllData}
-        allData={allData}
-        cardIsActive={cardIsActive}
-        setCardIsActive={setCardIsActive}
-        win={win}
-        currentRound={currentRound}
-      />
-      {showInstructions && (
-        <Instructions handleHowToPlayClick={handleHowToPlayClick} />
-      )}
-      <CatImage />
-      {lose && <Lose setLose={setLose} lose={lose} />}
+        <Cards
+          handleBackCardClick={handleBackCardClick}
+          handleCardClick={handleCardClick}
+          setCardsLeft={setCardsLeft}
+          lose={lose}
+          setAllData={setAllData}
+          allData={allData}
+          cardIsActive={cardIsActive}
+          win={win}
+          currentRound={currentRound}
+        />
+        {showInstructions && (
+          <Instructions handleHowToPlayClick={handleHowToPlayClick} />
+        )}
+        <CatImage />
+        {lose && <Lose lose={lose} />}
       </div>
       <HowToPlay handleHowToPlayClick={handleHowToPlayClick} />
-
     </div>
   );
 }
