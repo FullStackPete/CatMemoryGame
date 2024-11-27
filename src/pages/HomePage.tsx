@@ -5,12 +5,11 @@ import HowToPlay from "../components/HowToPlay";
 import Header from "../components/Header";
 import CatImage from "../components/CatImage";
 import Lose from "../components/Lose";
-import { CardType, favoriteCardType } from "../types";
+import { CardType } from "../types";
+import useFavoriteCards from "../hooks/useFavoriteCards";
 
 function HomePage() {
-  const [favorite, setFavorite] = useState<favoriteCardType[]>(() =>
-    JSON.parse(localStorage.getItem("cmgamefavorites") || "[]"),
-  );
+  const { favoriteCards, setFavoriteCards } = useFavoriteCards();
   const [currentRound, setCurrentRound] = useState<number>(3);
   const [pickedCards, setPickedCards] = useState<string[]>([]);
   const [cardsLeft, setCardsLeft] = useState<string[]>([""]);
@@ -82,8 +81,6 @@ function HomePage() {
       <Header winStreak={pickedCards.length} highestWin={highestWin} />
       <div className="flex-grow">
         <Cards
-          favorite={favorite}
-          s etFavorite={setFavorite}
           handleBackCardClick={handleBackCardClick}
           handleCardClick={handleCardClick}
           setCardsLeft={setCardsLeft}

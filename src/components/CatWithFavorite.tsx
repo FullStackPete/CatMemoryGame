@@ -1,10 +1,9 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import Icon from "./Icon";
 import { favoriteCardType } from "../types";
+import useFavoriteCards from "../hooks/useFavoriteCards";
 
 type CatWithFavoriteProps = {
-  setFavorite: Dispatch<SetStateAction<favoriteCardType[]>>;
-  favorite: favoriteCardType[];
   handleCardClick: () => void;
   url: string;
   catId: string;
@@ -13,19 +12,19 @@ export default function CatWithFavorite({
   handleCardClick,
   url,
   catId,
-  setFavorite,
-  favorite,
 }: CatWithFavoriteProps) {
+  const {favoriteCards,setFavoriteCards} = useFavoriteCards();
+
   useEffect(() => {
-    localStorage.setItem("cmgamefavorites", JSON.stringify(favorite));
-  }, [favorite]);
+    localStorage.setItem("cmgamefavorites", JSON.stringify(favoriteCards));
+  }, [favoriteCards]);
 
   function manageFavorite(favoriteCard: favoriteCardType): void {
-    const favoriteExists = favorite.some((item) => item.id === favoriteCard.id);
+    const favoriteExists = favoriteCards.some((item) => item.id === favoriteCard.id);
     if (favoriteExists) {
-      setFavorite((prev) => prev.filter((item) => item.id !== favoriteCard.id));
+      setFavoriteCards((prev) => prev.filter((item) => item.id !== favoriteCard.id));
     } else {
-      setFavorite((prev) => [...prev, favoriteCard]);
+      setFavoriteCards((prev) => [...prev, favoriteCard]);
     }
   }
   return (
@@ -41,7 +40,7 @@ export default function CatWithFavorite({
         iconName={"Favorite"}
         color={"white"}
         className="lg:top-4 cursor-pointer lg:right-4 absolute lg:text-4xl md:text-3xl text-xl top-1 right-1"
-        filled={favorite.some((item) => item.id === catId && item.url === url)}
+        filled={favoriteCards.some((item) => item.id === catId && item.url === url)}
       />
     </>
   );

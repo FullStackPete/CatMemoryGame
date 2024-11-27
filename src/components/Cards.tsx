@@ -3,7 +3,7 @@ import axios from "axios";
 import CardBackground from "../assets/card_bg.jpg";
 import Tilt from "react-parallax-tilt";
 import ReactCardFlip from "react-card-flip";
-import { CardType, favoriteCardType } from "../types";
+import { CardType } from "../types";
 import CatWithFavorite from "./CatWithFavorite";
 
 type CardsProps = {
@@ -16,13 +16,9 @@ type CardsProps = {
   cardIsActive: boolean;
   win: number;
   currentRound: number;
-  favorite: favoriteCardType[];
-  setFavorite: Dispatch<SetStateAction<favoriteCardType[]>>;
 };
 
 export function Cards({
-  setFavorite,
-  favorite,
   handleBackCardClick,
   handleCardClick,
   setCardsLeft,
@@ -84,9 +80,7 @@ export function Cards({
                 <CatWithFavorite
                   url={data.url}
                   catId={data.id}
-                  favorite={favorite}
                   handleCardClick={() => handleCardClick(data)}
-                  setFavorite={setFavorite}
                 />
               </ReactCardFlip>
             </Tilt>
