@@ -6,10 +6,8 @@ import Header from "../components/Header";
 import CatImage from "../components/CatImage";
 import Lose from "../components/Lose";
 import { CardType } from "../types";
-import useFavoriteCards from "../hooks/useFavoriteCards";
 
 function HomePage() {
-  const { favoriteCards, setFavoriteCards } = useFavoriteCards();
   const [currentRound, setCurrentRound] = useState<number>(3);
   const [pickedCards, setPickedCards] = useState<string[]>([]);
   const [cardsLeft, setCardsLeft] = useState<string[]>([""]);
