@@ -1,10 +1,19 @@
 type IconProps = {
   iconName: string;
-  fontSize: number;
   color: string;
+  fontSize?: number;
   onClick?: () => void;
+  className?: string;
+  filled?: boolean;
 };
-function Icon({ iconName, fontSize, color, onClick }: IconProps) {
+function Icon({
+  iconName,
+  fontSize,
+  color,
+  onClick,
+  className,
+  filled,
+}: IconProps) {
   const styledIcon = {
     fontSize: fontSize + "px",
     color: color,
@@ -13,7 +22,7 @@ function Icon({ iconName, fontSize, color, onClick }: IconProps) {
   return (
     <span
       onClick={onClick}
-      className="material-symbols-outlined"
+      className={`material-symbols-outlined ${filled ? "fill-icon" : ""} ${className ? className : ""}`}
       style={styledIcon}
     >
       {iconName}
@@ -22,4 +31,3 @@ function Icon({ iconName, fontSize, color, onClick }: IconProps) {
 }
 
 export default Icon;
-

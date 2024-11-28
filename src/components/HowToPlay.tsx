@@ -6,7 +6,7 @@ type HowToPlayProps = {
 function HowToPlay({ handleHowToPlayClick }: HowToPlayProps) {
   return (
     <>
-      <div className="flex flex-wrap justify-center align-bottom my-10 text-2xl">
+      <div className="flex flex-end justify-center align-bottom my-10 text-2xl ">
         <div
           onClick={handleHowToPlayClick}
           className="cursor-pointer flex justify-center items-center"
