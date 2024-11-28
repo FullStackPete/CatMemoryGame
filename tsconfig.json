@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "types": "vite/client",
+    "types": [
+      "vite/client"
+    ],
     "target": "ES6", // Nowoczesna wersja ECMAScript
     "module": "ESNext", // Nowoczesne moduły ES6
     "lib": [
