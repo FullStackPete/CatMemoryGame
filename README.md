@@ -10,10 +10,26 @@ A memory game built with React and Tailwind CSS, featuring parallax tilt effects
 
 ## Features
 
-- Memory game with card flipping animation
-- Parallax tilt effects using `react-parallax-tilt`
-- Fetches cat images from TheCatAPI
-- Responsive design with Tailwind CSS
+- [x] Memory game with card flipping animation
+- [x] Parallax tilt effects using `react-parallax-tilt`
+- [x] Fetches cat images from TheCatAPI
+- [x] Responsive design with Tailwind CSS
+
+>[!important] New!
+> As of November 28th 2024 I've come back to development of this application.
+> List of new features below.
+
+- [x] Add cats to favorite!
+- [x] Share cats with friends!
+
+#### To-do
+
+- [ ] Add achievements
+- [ ] Add dog API version
+- [ ] Add timer
+- [ ] Add dark mode
+- [ ] Add 'about' section
+- [ ] Add small footer
 
 ## Technologies Used
 
@@ -21,23 +37,25 @@ A memory game built with React and Tailwind CSS, featuring parallax tilt effects
 - ![Tailwind CSS](https://img.shields.io/badge/-Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
 - [react-parallax-tilt](https://www.npmjs.com/package/react-parallax-tilt)
 - [react-card-flip](https://www.npmjs.com/package/react-card-flip)
+- [react-toastify](https://www.npmjs.com/package/react-toastify)
 - [TheCatAPI](https://thecatapi.com/)
+
 
 ## Installation
 
 1. Clone the repository and install dependencies:
 
-```bash
+```
 git clone https://github.com/FullStackPete/CatMemoryGame/
 cd CatMemoryGame
 npm install
 ```
-2. Add .env file
+2. Add .env file in repository main directory
 3. Register on https://thecatapi.com
 4. Copy your ApiKey from email into .env file like this: 
-VITE_CatApiKey="YourApiKey"
+VITE_CatApiKey=<Insert your api key here>
 5. Run app as dev:
-```bash
+```
 npm run dev
 ```
 6. Visit localhost:5173
