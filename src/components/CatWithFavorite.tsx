@@ -16,7 +16,6 @@ export default function CatWithFavorite({
   catId,
   favoriteChosen,
   setFavoriteChosen,
-  favoritePage,
 }: CatWithFavoriteProps) {
   const { favoriteCards, manageFavorite } = useFavoriteCards();
 

@@ -6,12 +6,11 @@ import { useNavigate } from "react-router";
 
 export default function FavoritesPage() {
   const navigate = useNavigate();
-  const { favoriteCards, setFavoriteCards, manageFavorite } =
-    useFavoriteCards();
+  const { favoriteCards } = useFavoriteCards();
 
   return (
     <>
-      <div className="grid grid-cols-3 2xl:grid-cols-5 md:gap-x-16 gap-x-2 md:mx-[10%] mx-4 ">
+      <div className="grid grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 md:gap-x-16 gap-x-2 md:mx-[10%] mx-4 ">
         {favoriteCards.map((card) => (
           <div className="relative">
             <Tilt
