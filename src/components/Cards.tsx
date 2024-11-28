@@ -36,7 +36,11 @@ export function Cards({
     import.meta.env.VITE_CatApiKey
   }`;
   useEffect(() => {
+    let isFetching = false;
     const fetchData = async () => {
+      if (isFetching) return;
+      isFetching = true;
+
       try {
         const res = await axios.get(CatApi);
         console.log(res.data);
@@ -45,8 +49,11 @@ export function Cards({
         setCardsLeft(cardIds);
       } catch (err) {
         console.log("Error fetching data: ", err);
+      } finally {
+        isFetching = false;
       }
     };
+
     fetchData();
   }, [lose, win]);
   const chunkedData = Array.from(
@@ -58,7 +65,7 @@ export function Cards({
   }, [lose, win]);
 
   return (
-    <div className="flex flex-col justify-center mt-8 md:mt-0 items-center md:h-full">
+    <div className="flex flex-col justify-center mt-8 md:mt-0 items-center ">
       {chunkedData.map((chunk, index) => (
         <div
           className="flex justify-center items-center flex-row mx-2"

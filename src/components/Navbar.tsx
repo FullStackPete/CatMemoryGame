@@ -1,11 +1,21 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import TextDecoration from "./TextDecoration";
 import useWin from "../hooks/useWin";
+import { useEffect } from "react";
 
 function Navbar() {
   const { highestWin, winStreak } = useWin();
   const navigate = useNavigate();
   const location = useLocation();
+  useEffect(() => {
+    console.log(winStreak);
+  }, [winStreak]);
+  function checkNavigation() {
+    if (winStreak !== 0) {
+      // Ask for confirmation before navigating user, inform him about losign current gamestreak
+    }
+    navigate("/favorites");
+  }
   return (
     <div className="border-[#242038] border-b-8 rounded-b-3xl text-background md:border-none">
       <div className="flex flex-col  items-center font-color md:bg-[#A891D4]">
@@ -18,7 +28,9 @@ function Navbar() {
           </p>
         </TextDecoration>
         <div
-          onClick={() => navigate("/favorites")}
+          onClick={() => {
+            checkNavigation();
+          }}
           className="pacifico text-2xl underline lg:no-underline lg:hover:underline justify-center md:text-[#242028] text-[#ffa3d9] cursor-pointer mt-4 underline-offset-4"
           style={location.pathname !== "/" ? { marginBottom: 2 + "rem" } : {}}
         >

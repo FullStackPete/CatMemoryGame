@@ -6,11 +6,12 @@ import {
   useState,
 } from "react";
 import { favoriteCardType } from "../types";
+import { toast, Zoom } from "react-toastify";
 
 type FavoriteCardsContextType = {
   favoriteCards: favoriteCardType[];
   setFavoriteCards: Dispatch<SetStateAction<favoriteCardType[]>>;
-  manageFavorite: (favoriteCard: favoriteCardType)=>void;
+  manageFavorite: (favoriteCard: favoriteCardType) => void;
 };
 
 export const FavoriteCardsContext = createContext<
@@ -23,19 +24,49 @@ export function FavoriteCardsProvider({ children }: { children: ReactNode }) {
   );
 
   function manageFavorite(favoriteCard: favoriteCardType): void {
-  const favoriteExists = favoriteCards.some(
-    (item) => item.id === favoriteCard.id,
-  );
-  if (favoriteExists) {
-    setFavoriteCards((prev) =>
-      prev.filter((item) => item.id !== favoriteCard.id),
+    const favoriteExists = favoriteCards.some(
+      (item) => item.id === favoriteCard.id,
     );
-  } else {
-    setFavoriteCards((prev) => [...prev, favoriteCard]);
+    if (favoriteExists) {
+      const cardIndex = favoriteCards.findIndex(
+        (item) => item.id === favoriteCard.id,
+      );
+      setFavoriteCards((prev) =>
+        prev.filter((item) => item.id !== favoriteCard.id),
+      );
+      toast(
+        <>
+          Removed from favorite cards&nbsp;
+          <button
+            onClick={() => {
+              setFavoriteCards((prev) => {
+                const updatedFavorites = [...prev];
+                updatedFavorites.splice(cardIndex, 0, favoriteCard);
+                return updatedFavorites;
+              });
+            }}
+            className="btn-light"
+          >
+            Undo
+          </button>
+        </>,
+        {
+          closeOnClick: true,
+          position: "top-right",
+          autoClose: 5000,
+          draggable: true,
+          theme: "dark",
+          transition: Zoom,
+        },
+      );
+    } else {
+      setFavoriteCards((prev) => [...prev, favoriteCard]);
+    }
   }
-}
   return (
-    <FavoriteCardsContext.Provider value={{ favoriteCards, setFavoriteCards,manageFavorite }}>
+    <FavoriteCardsContext.Provider
+      value={{ favoriteCards, setFavoriteCards, manageFavorite }}
+    >
       {children}
     </FavoriteCardsContext.Provider>
   );

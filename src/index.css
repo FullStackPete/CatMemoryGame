@@ -26,6 +26,13 @@ body {
   font-family: "Pacifico", cursive;
 }
 
+.menu-cards {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+}
+
+
 .jost {
   font-family: "Jost", sans-serif;
 }
@@ -70,5 +77,9 @@ body {
 .hide {
   transition: all 0.5s ease-in-out;
   transform: translateX(-120vw);
+}
+
+.btn-light {
+  @apply px-2 py-1 bg-[#926ac4] border-2 border-[#7d4eb9] rounded-md text-white hover:bg-[#7d4eb9];
 
 }

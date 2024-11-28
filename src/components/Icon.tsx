@@ -1,6 +1,6 @@
 type IconProps = {
   iconName: string;
-  color: string;
+  color?: string;
   fontSize?: number;
   onClick?: () => void;
   className?: string;
