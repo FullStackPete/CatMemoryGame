@@ -8,6 +8,7 @@ const useFavoriteCards = () => {
       "FavoriteCardsContext must be used within FavoriteCardsProvider",
     );
   }
+
   return context;
 };
 export default useFavoriteCards;

@@ -1,20 +1,21 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 import CardBackground from "../assets/card_bg.jpg";
 import Tilt from "react-parallax-tilt";
 import ReactCardFlip from "react-card-flip";
 import { CardType } from "../types";
 import CatWithFavorite from "./CatWithFavorite";
+import useWin from "../hooks/useWin";
 
 type CardsProps = {
   handleBackCardClick: () => void;
   handleCardClick: (data: CardType) => void;
   setCardsLeft: Dispatch<SetStateAction<string[]>>;
+  cardsLeft: string[];
   lose: boolean;
   allData: CardType[];
   setAllData: Dispatch<SetStateAction<CardType[]>>;
   cardIsActive: boolean;
-  win: number;
   currentRound: number;
 };
 
@@ -26,9 +27,10 @@ export function Cards({
   allData,
   setAllData,
   cardIsActive,
-  win,
   currentRound,
 }: CardsProps) {
+  const { win } = useWin();
+  const [favoriteChosen, setFavoriteChosen] = useState<boolean>(false);
   const chunkSize = 3;
   const CatApi = `https://api.thecatapi.com/v1/images/search?limit=${currentRound}&api_key=${
     import.meta.env.VITE_CatApiKey
@@ -45,14 +47,15 @@ export function Cards({
         console.log("Error fetching data: ", err);
       }
     };
-
     fetchData();
   }, [lose, win]);
-
   const chunkedData = Array.from(
     { length: Math.ceil(allData.length / chunkSize) },
     (_, index) => allData.slice(index * chunkSize, (index + 1) * chunkSize),
   );
+  useEffect(() => {
+    setFavoriteChosen(false);
+  }, [lose, win]);
 
   return (
     <div className="flex flex-col justify-center mt-8 md:mt-0 items-center md:h-full">
@@ -78,6 +81,8 @@ export function Cards({
                   src={CardBackground}
                 />
                 <CatWithFavorite
+                  favoriteChosen={favoriteChosen}
+                  setFavoriteChosen={setFavoriteChosen}
                   url={data.url}
                   catId={data.id}
                   handleCardClick={() => handleCardClick(data)}
