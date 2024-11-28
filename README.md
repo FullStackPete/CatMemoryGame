@@ -15,7 +15,7 @@ A memory game built with React and Tailwind CSS, featuring parallax tilt effects
 - [x] Fetches cat images from TheCatAPI
 - [x] Responsive design with Tailwind CSS
 
-> [!IMPORTANT] New!
+> [!IMPORTANT]
 > As of November 28th 2024 I've come back to development of this application.
 > List of new features below.
 
